@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 class SnowCover:
-
+    #  decode snow cover parameters from string encoded by kn-24
     def __init__ (self, row):
         self.row = row
         self.station_index = ''
@@ -28,7 +28,8 @@ class SnowCover:
         self.error = ''
 
     def get_snow_cover(self):
-
+        #  returns an array of dictionaries with parameters of
+        #  snow cover in a field and / or in a forest or with an error
         out = []
         self.parse_row()
 
@@ -42,7 +43,8 @@ class SnowCover:
         return out   
 
     def parse_row(self):
-
+        #  parses an attribute 'row' into other class attributes
+        #  by kn-24 instruction
         blocks = self.row.split() 
         if len(blocks) == 0:
            pass 
@@ -77,7 +79,8 @@ class SnowCover:
             self._set_error("ERROR: impossible to parse the record: "+self.row)
 
     def _parse_observation(self, block):
-
+        #  parses observation blocks into class attributes
+        #  by 'section 1' kn-24 instruction
         if block[0] == '1':
             self.is_field = True
             self.field_height = block[1:4]
@@ -104,7 +107,8 @@ class SnowCover:
             self.forest_soil_condition = block[4]
 
     def get_field_snow_cover(self):
-
+        #  returns a dictionary with snow cover parameters in a field 
+        #  from the attributes
         output = {}
              
         output['station_index'] = int(self.station_index)
@@ -132,7 +136,8 @@ class SnowCover:
         return output   
 
     def get_forest_snow_cover(self):
-
+        #  returns a dictionary with snow cover parameters in a forest 
+        #  from the attributes
         output = {}
              
         output['station_index'] = int(self.station_index)
@@ -160,7 +165,8 @@ class SnowCover:
         return output   
 
     def get_error(self):
-
+        #  returns a dictionary with error parameters  
+        #  from the attributes
         output = {}
 
         if self.station_index !='': 
@@ -179,11 +185,11 @@ class SnowCover:
         return output   
 
     def _is_valid(self, param):
-
+        #  return True if the attribute is not empty
         if param.isdigit() and param.find('/') == -1:
             return True 
     
     def _set_error(self, error):
-
+        #  add an error to the attributes
         self.is_error = True
         self.error = self.error + error
