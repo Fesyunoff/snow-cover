@@ -29,7 +29,7 @@ def main():
 
     with open(output_file_path, 'w') as output_file:
         logging.debug('output file "'+output_file_path+'" was open')
-        logging.info('INFO: from the directory "'+directory+'" received files:')
+        logging.info('from the directory "'+directory+'" received files:')
         for file_name in file_list:
             path = os.path.join(directory, file_name)
             logging.info(file_name)
