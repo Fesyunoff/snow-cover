@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-class Snow_cover:
+class SnowCover:
 
     def __init__ (self, row):
         self.row = row
@@ -43,7 +43,7 @@ class Snow_cover:
 
     def parse_row(self):
 
-        blocks = list(map(str, self.row.split())) 
+        blocks = self.row.split() 
         if len(blocks) == 0:
            pass 
         elif blocks[0].isdigit() and len(blocks[0]) == 5:
@@ -61,20 +61,20 @@ class Snow_cover:
                         self._parse_observation(block)
                     elif block.isalpha():
                         if block.find('NIL') != -1 or block.find('НИЛ') != -1:
-                            self._set_error('ERROR: record has no content: '+self.row)
+                            self._set_error("ERROR: record "+self.row+" has no content")
                         else:
                             self.special_marks = self.special_marks + block + ' '
                     elif len(block) != 5:
-                        self._set_error('ERROR: incorrect block format: '+self.row)
+                        self._set_error("ERROR: incorrect block format: "+self.row)
                     else:
-                        self._set_error('ERROR: impossible to parse the record: '+self.row)
+                        self._set_error("ERROR: impossible to parse the record: "+self.row)
             else:
                 if blocks[1].find('NIL') != -1 or blocks[1].find('НИЛ') != -1:
-                    self._set_error('ERROR: record has no content: '+self.row)
+                    self._set_error("ERROR: record "+self.row+" has no content")
                 else:
-                    self._set_error('ERROR: incorrect date format: '+self.row)
+                    self._set_error("ERROR: incorrect date format: "+self.row)
         else:
-            self._set_error('ERROR: impossible to parse the record: '+self.row)
+            self._set_error("ERROR: impossible to parse the record: "+self.row)
 
     def _parse_observation(self, block):
 

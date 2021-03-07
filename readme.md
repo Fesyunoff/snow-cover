@@ -32,12 +32,12 @@
 ```
 You can set args: 
 ```
-    path to directory
-    path output file 
-    v (print all data to terminal)
+    path to directory with input files (default: './samples')
+    path to output file (default: './output.json') 
+    loglevel ('info' | 'debug') (default: 'info')
+
 ```
 For example:
 
 ```
-    $ python3 parser.py ./samples/ output.json v 
-```
+    $ python3 parser.py ./samples ./output.json debug 
